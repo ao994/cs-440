@@ -1,2 +1,2 @@
 # cs-440
-Alyssa and Karissa's onging project for cs-440.
+Alyssa and Karissa's ongoing project for cs-440.
