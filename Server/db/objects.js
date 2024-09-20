@@ -4,10 +4,7 @@ const { Schema } = mongoose;
 //grade object
 const gradeSchema = new Schema({
     student_id: Number,
-    scores: [{
-        type: String,
-        score: Number
-    }],
+    scores: [Schema.Types.Mixed],
     class_id: Number
 });
 

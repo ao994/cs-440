@@ -12,7 +12,7 @@ const router = express.Router();
 
 // This sends all posts to the home page.
 router.get("/", async (req, res) => {
-  Grade.find({}).then(function(results){res.send(results).status(200);});
+  Grade.find({student_id: 1}).then(function(results){res.send(results).status(200);});
 });
 
 
