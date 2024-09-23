@@ -1,17 +1,17 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-//grade object
-const gradeSchema = new Schema({
-    student_id: Number,
-    scores: [Schema.Types.Mixed],
-    class_id: Number
+//user object
+const userSchema = new Schema({
+    name:String,
+    email:String,
+    password:String
 });
 
-export const Grade = mongoose.model('Grade', gradeSchema);
+export const User = mongoose.model('User', userSchema);
 
 
 
 
 //exports
-export default {Grade};
+export default {User};

@@ -7,9 +7,12 @@ import {
 
 import App from "./App";
 import Home from "./components/Home";
-
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 import "./index.css";
+// Import our custom CSS
+import './scss/styles.scss';
 
 
 const router = createBrowserRouter([
@@ -22,6 +25,30 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    element: <App 
+      user={localStorage.getItem("username")}
+    />,
+    children: [
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <App 
+      user={localStorage.getItem("username")}
+    />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

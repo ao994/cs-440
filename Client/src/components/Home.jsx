@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 export default function Home() {
     const [posts, setPosts] = useState([]);
 
-    // This method fetches the records from the database.
+    // This method fetches the names of users from the database.
     useEffect(() => {
         async function getPosts() {
-            const response = await fetch(`http://localhost:5050/training/`);
+            const response = await fetch(`http://localhost:5050/planner/`);
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
                 console.error(message);
@@ -26,7 +26,7 @@ export default function Home() {
         return posts.map((post) => {
             return (
                 <> <div className="homepage"> 
-                    <p>- Class id: {post.class_id}</p>
+                    <p>- Name: {post.name}</p>
                 </div></>
             );
         });
