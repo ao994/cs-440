@@ -13,8 +13,9 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post("http://localhost:5050/planner/signup", { name, email, password })
-        .then(result => {console.log(result)
-        navigate("/login")
+        .then(result => {
+            console.log(result)
+            navigate("/login")
         })
         .catch(err => console.log(err))
     }

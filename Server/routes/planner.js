@@ -5,7 +5,7 @@ import cors from "cors";
 // This will help us connect to the database
 import "../db/connection.js";
 //import defined objects
-import {User} from "../db/objects.js";
+import {User, Task} from "../db/objects.js";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -39,6 +39,23 @@ router.post("/signup", (req, res) => {
   .catch(err => res.json(err))
 })
 
+
+router.get("/tasks", (req, res) => {
+  Task.find(req.body.username).then(function(results){res.send(results).status(200);});
+})
+
+router.get("/tasks/user", (req, res) => {
+  User.findOne(req.body.username).then(function(result){res.send(result).status(200);});
+})
+
+
+
+router.post("/tasks", (req, res) => {
+  console.log(req.body);
+  Task.create(req.body)
+  .then(task => res.json(task))
+  .catch(err => res.json(err))
+})
 
 
 export default router;

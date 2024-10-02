@@ -7,11 +7,19 @@ const userSchema = new Schema({
     email:String,
     password:String
 });
-
 export const User = mongoose.model('User', userSchema);
 
-
+//task object
+const taskSchema = new Schema({
+    username:String,
+    task:String,
+    description:String,
+    course:String,
+    dueDate:Date,
+    complete:Boolean
+});
+export const Task = mongoose.model('Task', taskSchema);
 
 
 //exports
-export default {User};
+export default {User, Task};

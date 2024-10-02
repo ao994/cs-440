@@ -9,6 +9,7 @@ import App from "./App";
 import Home from "./components/Home";
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Tasks from './components/Tasks';
 
 import "./index.css";
 // Import our custom CSS
@@ -52,7 +53,18 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+  {
+    path: "/tasks",
+    element: <App 
+      user={localStorage.getItem("username")}
+    />,
+    children: [
+      {
+        path: "/tasks",
+        element: <Tasks />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
