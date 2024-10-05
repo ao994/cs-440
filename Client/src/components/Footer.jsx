@@ -6,7 +6,7 @@ function Footer() {
     return (
       <>
         <footer className="fixed-bottom">
-          <p>@ Canvas App {year}</p>
+          <p> ©Planner App {year}</p>
         </footer>
       </>
     );

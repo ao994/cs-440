@@ -17,7 +17,7 @@ function Login() {
             if(result.data === "Success"){
                 sessionStorage.setItem("username", email
                 );
-                navigate("/")
+                navigate("/tasks")
             }else{
                 navigate("/signup")
                 alert("You are not registered to this service")
@@ -28,9 +28,16 @@ function Login() {
         .catch(err => console.log(err))
     }
 
+    const logout = () => {
+        sessionStorage.removeItem("username");
+        location.reload();
+    };
+
 
   return (
-    <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
+    <>
+    {(!sessionStorage.username) ? (
+        <div className="d-flex justify-content-center align-items-center">
         <div className="bg-white p-3 rounded w-25">
             <h2><center>Login</center></h2>
             <form onSubmit={handleSubmit}>
@@ -70,7 +77,19 @@ function Login() {
                 </Link>
             
         </div>
-    </div>
+        </div>
+    ) : (
+        <div className="d-flex justify-content-center align-items-center">
+        <div className="bg-white p-3 rounded w-25">
+            <h1>User is logged in</h1>
+            <br></br>
+            <button className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none" onClickCapture={logout}>
+                Logout User
+            </button>
+        </div>
+        </div>
+    )}
+    </>
   );
 }
 

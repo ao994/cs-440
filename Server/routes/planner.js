@@ -40,14 +40,12 @@ router.post("/signup", (req, res) => {
 })
 
 
-router.get("/tasks", (req, res) => {
-  Task.find(req.body.username).then(function(results){res.send(results).status(200);});
+router.get("/tasks/:username", (req, res) => {
+  Task.find({username: req.params.username}).then(function(results){
+    if (!results) res.send("No users found").status(404);
+    else res.send(results).status(200);
+  });
 })
-
-router.get("/tasks/user", (req, res) => {
-  User.findOne(req.body.username).then(function(result){res.send(result).status(200);});
-})
-
 
 
 router.post("/tasks", (req, res) => {

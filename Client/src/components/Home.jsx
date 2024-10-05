@@ -3,38 +3,39 @@ import { Link } from "react-router-dom";
 
 
 export default function Home() {
-    const [posts, setPosts] = useState([]);
+    const [users, setUsers] = useState([]);
 
     // This method fetches the names of users from the database.
     useEffect(() => {
-        async function getPosts() {
+        async function getUsers() {
             const response = await fetch(`http://localhost:5050/planner/`);
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
                 console.error(message);
                 return;
             }
-            const posts = await response.json();
-            setPosts(posts);
+            const users = await response.json();
+            setUsers(users);
         }
-        getPosts();
+        getUsers();
         return;
-    }, [posts.length]);
+    }, [users.length]);
 
 
-    function postList() {
-        return posts.map((post) => {
+    function userList() {
+        return users.map((user) => {
             return (
-                <> <div className="homepage"> 
-                    <p>- Name: {post.name}</p>
-                </div></>
+                <> <div key={user._id}> 
+                    <p>- Name: {user.name}</p>
+                </div> </>
             );
         });
     }    
     
     return (
         <div>
-            {postList()}
+            <h2>Join our growing list of users! Current users listed below:</h2>
+            {userList()}
         </div>
     );
 }
