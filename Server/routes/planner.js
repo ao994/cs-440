@@ -1,13 +1,15 @@
 import express from "express";
+import mongoose from 'mongoose';
+import cors from "cors";
+
 import { loginUser, registerUser } from "../services/userService.js";
 import { fetchTasksForUser, addTask } from "../services/taskService.js";
-//import mongoose from 'mongoose';
-//import cors from "cors";
+
 
 // This will help us connect to the database
-//import "../db/connection.js";
+import "../db/connection.js";
 //import defined objects
-//import {User, Task} from "../db/objects.js";
+import {User, Task} from "../db/objects.js";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -16,8 +18,7 @@ const router = express.Router();
 
 // This sends all user information to the home page.
 router.get("/", async (req, res) => {
-  const users = await fetchAllUsers();
-  res.status(200).send(users);
+  User.find().then(function(results){res.send(results).status(200);});
 });
 
 router.post("/login", async (req, res) => {
