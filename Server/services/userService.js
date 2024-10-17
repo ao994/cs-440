@@ -1,4 +1,4 @@
-import { findUserByEmail, createUser } from "../data/taskDataAccess.js";
+import { findUserByEmail, createUser } from "../data/taskData.js";
 
 export const loginUser = async (email, password) => {
   const user = await findUserByEmail(email);
