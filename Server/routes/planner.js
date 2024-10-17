@@ -1,11 +1,13 @@
 import express from "express";
-import mongoose from 'mongoose';
-import cors from "cors";
+import { loginUser, registerUser } from "../services/userService.js";
+import { fetchTasksForUser, addTask } from "../services/taskService.js";
+//import mongoose from 'mongoose';
+//import cors from "cors";
 
 // This will help us connect to the database
-import "../db/connection.js";
+//import "../db/connection.js";
 //import defined objects
-import {User, Task} from "../db/objects.js";
+//import {User, Task} from "../db/objects.js";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -14,45 +16,31 @@ const router = express.Router();
 
 // This sends all user information to the home page.
 router.get("/", async (req, res) => {
-  User.find().then(function(results){res.send(results).status(200);});
+  const users = await fetchAllUsers();
+  res.status(200).send(users);
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const {email, password} = req.body;
-  User.findOne({email : email})
-  .then(user => {
-      if(user) {
-          if(user.password === password){
-              res.json("Success")
-          }else{
-              res.json("The password is incorrect")
-          }
-      }else{
-          res.json("No record existed")
-      }
-  })
-})
+  const message = await loginUser(email, password);
+  res.json(message);
+});
 
-router.post("/signup", (req, res) => {
-  User.create(req.body)
-  .then(user => res.json(user))
-  .catch(err => res.json(err))
-})
+router.post("/signup", async (req, res) => {
+  const user = await registerUser(req.body);
+  res.json(user);
+});
 
 
-router.get("/tasks/:username", (req, res) => {
-  Task.find({username: req.params.username}).then(function(results){
-    if (!results) res.send("No users found").status(404);
-    else res.send(results).status(200);
-  });
-})
+router.get("/tasks/:username", async (req, res) => {
+  const tasks = await fetchTasksForUser(req.params.username);
+  res.status(200).send(tasks);
+});
 
 
-router.post("/tasks", (req, res) => {
-  console.log(req.body);
-  Task.create(req.body)
-  .then(task => res.json(task))
-  .catch(err => res.json(err))
+router.post("/tasks", async (req, res) => {
+  const task = await addTask(req.body);
+  res.json(task);
 })
 
 
