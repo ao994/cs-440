@@ -34,6 +34,7 @@ export default function Home() {
     
     return (
         <div>
+            <h1>Course Planner</h1>
             <h2>Join our growing list of users! Current users listed below:</h2>
             {userList()}
         </div>
