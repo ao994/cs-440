@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import planner from "./routes/planner.js";
+import planner from "./planner.js";
 
 const PORT = process.env.PORT || 5050;
 const app = express();

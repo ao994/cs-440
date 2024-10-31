@@ -2,10 +2,37 @@ import express from "express";
 import mongoose from 'mongoose';
 import cors from "cors";
 
-// This will help us connect to the database
-import "../db/connection.js";
-//import defined objects
-import {User, Task} from "../db/objects.js";
+const uri = process.env.ATLAS_URI || "";
+
+//this will connect to the server
+try {
+  // Connect the client to the server
+  await mongoose.connect(uri);
+} catch(err) {
+  console.error(err);
+}
+
+//define objects
+const { Schema } = mongoose;
+//user object
+const userSchema = new Schema({
+  name:String,
+  email:String,
+  password:String
+});
+const User = mongoose.model('User', userSchema);
+
+//task object
+const taskSchema = new Schema({
+  username:String,
+  task:String,
+  description:String,
+  course:String,
+  dueDate:Date,
+  complete:Boolean
+});
+const Task = mongoose.model('Task', taskSchema);
+
 
 // router is an instance of the express router.
 // We use it to define our routes.
