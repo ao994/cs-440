@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ATLAS_URI=${ATLAS_URI}
+    networks:
+      - app-network
+
+  task-service:
+    build:
+      context: ./task-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - ATLAS_URI=${ATLAS_URI}
+    networks:
+      - app-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5050"
+    depends_on:
+      - user-service
+      - task-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,4 +1,4 @@
-import { findUserByEmail, createUser } from "../data/userData.js";
+import { findUserByEmail, createUser } from "./userData.js";
 
 export const loginUser = async (email, password) => {
   const user = await findUserByEmail(email);

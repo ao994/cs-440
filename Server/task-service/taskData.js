@@ -1,6 +1,7 @@
-import { Task, User } from "../db/objects.js";
+import { Task } from './objects.js';
 
-export const findUserByEmail = (email) => User.findOne({ email });
-export const createUser = (userData) => User.create(userData);
+// Fetch tasks for a specific user
 export const getUserTasks = (username) => Task.find({ username });
+
+// Create a new task
 export const createTask = (taskData) => Task.create(taskData);
