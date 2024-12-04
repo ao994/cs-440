@@ -17,16 +17,19 @@ npm install
 
 Create your config.env file in the Server folder. Note that this will not be synced to github as it contains sensitive information.
 
+Also, make sure that you have Docker Desktop installed.
+
 ## Instructions for running
 
 In a terminal window, in the /Server directory, run the following:
 ```
-node --env-file=config.env server
+docker compose up
 ```
 
 Now, in a separate terminal window, in the /Client directory, run the following:
 ```
-npm run dev
+docker build -t client .
+docker run client
 ```
 
 both must be running at the same time for the website to work correctly!
